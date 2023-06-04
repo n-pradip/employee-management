@@ -42,7 +42,8 @@ class EmployeeUpdateView(View):
     def get(self, request, pk):
         employee = get_object_or_404(Employee, pk=pk)
         qualifications = Qualification.objects.all()
-        return render(request, 'employee/update.html', {'employee': employee, 'qualifications': qualifications})
+        selected_qualifications = employee.qualifications.values_list('id', flat=True)
+        return render(request, 'employee/update.html', {'employee': employee, 'qualifications': qualifications, 'selected_qualifications': selected_qualifications})
 
     def post(self, request, pk):
         employee = get_object_or_404(Employee, pk=pk)
@@ -59,8 +60,7 @@ class EmployeeUpdateView(View):
         employee.save()
 
         return redirect('employee_detail', pk=pk)
-    
-    
+
 class EmployeeDeleteView(View):
     def post(self, request, pk):
         employee = get_object_or_404(Employee, pk=pk)

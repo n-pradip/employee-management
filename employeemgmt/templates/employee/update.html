@@ -2,6 +2,7 @@
 {% block title %}Update Employee{% endblock %}
 
 {% block content %}
+<div class="container">
     <h1>Update Employee</h1>
     <form method="post">
         {% csrf_token %}
@@ -34,10 +35,13 @@
             <select class="form-select" id="qualification" name="qualification" multiple>
                 {% for qualification in qualifications %}
                     <option value="{{ qualification.id }}"
-                            {% if qualification in employee.qualifications.all %}selected{% endif %}>{{ qualification.name }}</option>
+                        {% if qualification.id in selected_qualifications %}selected{% endif %}>
+                        {{ qualification.name }}
+                    </option>
                 {% endfor %}
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
+</div>
 {% endblock %}

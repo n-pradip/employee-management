@@ -2,6 +2,7 @@
 {% block title %}Create Employee{% endblock %}
 
 {% block content %}
+<div class="container">
     <h1>Create Employee</h1>
     <form method="post">
         {% csrf_token %}
@@ -39,4 +40,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
+</div>
 {% endblock %}
